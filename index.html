@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamiento de Citas Médicas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; text-align: center; }
+        .btn { padding: 10px 20px; margin: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>INTRODUCCION</h1>
+    <P>
+        En el contexto actual, la digitalización de los servicios de salud es crucial para mejorar la eficiencia y accesibilidad. Un problema recurrente en los hospitales es la dificultad que muchos usuarios encuentran al solicitar y agendar citas debido a barreras en la escritura y el manejo de tecnologías tradicionales. Por ello, se propone la creación de una solución digital amigable y accesible para facilitar este proceso.
+    </P>
+    <h1>OBJETIVO GENERAL</h1>
+    <P>
+        Desarrollar un sistema digital de agendamiento de citas médicas que permita a los usuarios del hospital solicitar y programar citas de manera sencilla y accesible, independientemente de sus habilidades de escritura.
+    </P>
+    <h1>OBJETIVO ESPECIFICO</h1>
+    <P>
+        Diseñar una interfaz de usuario intuitiva y fácil de usar, con soporte para comandos de voz y opciones gráficas.
+        Implementar un sistema de agendamiento que permita a los usuarios seleccionar fechas y horas disponibles de manera eficiente.
+        Desarrollar una base de datos segura para almacenar la información de las citas y los pacientes.
+        Integrar notificaciones automáticas para recordar a los usuarios sus citas programadas.
+        Probar y validar el sistema con usuarios reales para asegurar su funcionalidad y accesibilidad.
+        
+    </P>
+    <h1>CARACTERISTICAS DE SOLUCION</h1>
+    <P>
+        Interfaz de Usuario Amigable: Diseño intuitivo con botones grandes y claras instrucciones visuales y auditivas.
+Soporte de Comandos de Voz: Permite a los usuarios solicitar y agendar citas usando comandos de voz.
+Selección de Fecha y Hora: Calendario interactivo que muestra las disponibilidades de los médicos.
+Notificaciones Automáticas: Recordatorios por SMS y correo electrónico.
+Seguridad de Datos: Encriptación de la información de los pacientes y citas.
+
+    </P>
+
+    <div class="container">
+        
+        <h2>Hospital la Mano de Dios</h2>
+        <h2>Agenda su Cita Médica</h2>
+        <button class="btn" onclick="startVoiceRecognition()">Solicitar Cita por Voz</button>
+        <p id="status">Esperando comando de voz...</p>
+        <form id="appointmentForm">
+            <label for="date">Fecha:</label>
+            <input type="date" id="date" name="date" required><br><br>
+            <label for="time">Hora:</label>
+            <input type="time" id="time" name="time" required><br><br>
+            <button type="submit" class="btn">Agendar Cita</button>
+        </form>
+    </div>
+
+    <script>
+        function startVoiceRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+            recognition.onresult = function(event) {
+                const command = event.results[0][0].transcript;
+                document.getElementById('status').innerText = 'Comando recibido: ' + command;
+                // Procesar el comando de voz aquí
+            };
+            recognition.start();
+        }
+
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            alert('Cita agendada para ' + date + ' a las ' + time);
+            // Enviar datos al servidor aquí
+        });
+    </script>
+    <p>
+        <div class ="img">
+        <img src="imagen/manodedios.jpg" alt="manodedios">
+    </div>
+    </p>
+
+</body>
+</html>
